@@ -72,3 +72,7 @@ app.post('/search', (req, res) => {
         res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages})
     })
 })
+
+app.get('*', (req, res) => {
+    res.redirect('/');
+});
