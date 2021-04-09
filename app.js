@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
         .then(result => result.json())
         .then(data => {
-            res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages })
+            res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages, current: req.params.id })
         })
 })
 
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
         .then(result => result.json())
         .then(data => {
-            res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages })
+            res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages, current: req.params.id })
         })
 })
 
@@ -48,7 +48,7 @@ app.get('/movies/genre/:id', (req, res) => {
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&with_genres=${req.params.id}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
     .then(result => result.json())
     .then(data => {       
-        res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages})
+        res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages, current: req.params.id})
     })
 })
 
@@ -57,7 +57,7 @@ app.get('/movies/page/:id', (req, res) => {
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&with_genres=28&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${req.params.id}`)
     .then(result => result.json())
     .then(data => {
-        res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages})
+        res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages, current: req.params.id})
     })
 })
 
@@ -69,7 +69,7 @@ app.post('/search', (req, res) => {
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${req.body.searchString}`)
     .then(result => result.json())
     .then(data => {
-        res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages})
+        res.render('pages/index', { data: data.results, imageUrl: 'https://image.tmdb.org/t/p/w500/', total_pages: data.total_pages, current: req.params.id})
     })
 })
 

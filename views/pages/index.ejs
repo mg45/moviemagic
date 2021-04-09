@@ -26,11 +26,35 @@
         <div class="container">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <% for( let index=1; index <=total_pages -480; index++ ) { %>
-                        <li class="page-item"><a class="page-link" href="/movies/page/<%= index %> ">
-                                <%= index %>
-                            </a></li>
-                        <% } %>
+                    <% if (total_pages > 0) { %>
+                        <ul class="pagination text-center">
+                            <% if (current == 1) { %>
+                                <li class="disabled"><a>First</a></li>
+                            <% } else { %>
+                                <li><a href="/movies/page/1">First</a></li>
+                            <% } %>
+                            <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                            <% if (i !== 1) { %>
+                                <li class="disabled"><a>...</a></li>
+                            <% } %>
+                            <% for (; i <= (Number(current) + 4) && i <= total_pages; i++) { %>
+                                <% if (i == current) { %>
+                                    <li class="active"><a><%= i %></a></li>
+                                <% } else { %>
+                                    <li><a href="/movies/page/<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% if (i == Number(current) + 4 && i < total_pages) { %>
+                                    <li class="disabled"><a>...</a></li>
+                                <% } %>
+                            <% } %>
+                            <% if (current == total_pages) { %>
+                                <li class="disabled"><a>Last</a></li>
+                            <% } else { %>
+                                <li><a href="/movies/page/<%= total_pages %>">Last</a></li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+
                 </ul>
             </nav>
         </div>
